@@ -1,0 +1,11 @@
+name: personal-goals-server
+
+services:
+  postgres_db:
+    image: bitnami/postgresql:13.16.0
+    ports:
+      - "5410:5432"
+    environment:
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=docker
+      - POSTGRES_DB=goals_db
