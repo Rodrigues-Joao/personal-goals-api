@@ -3,6 +3,7 @@ import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fas
 import { createGoal } from "../functions/create-goal";
 import z from 'zod'
 import { getWeekPendingGoals } from "../functions/get-week-pending-goals";
+import { createGoalCompletion } from "../functions/create-goal-completion";
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.setValidatorCompiler( validatorCompiler );
 app.setSerializerCompiler( serializerCompiler );
@@ -23,6 +24,17 @@ app.post( '/goals', {
 {
     const body = request.body
     await createGoal( body )
+} )
+app.post( '/goal-completion', {
+    schema: {
+        body: z.object( {
+            goalId: z.string(),
+        } )
+    }
+}, async ( request ) =>
+{
+    const body = request.body
+    await createGoalCompletion( body )
 } )
 app.listen( {
     port: 3333
