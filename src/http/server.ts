@@ -3,6 +3,7 @@ import { serializerCompiler, validatorCompiler, type ZodTypeProvider } from "fas
 import { createGoalRoute } from "./routes/create-goal";
 import { createGoalCompletionRoute } from "./routes/create-goal-completion";
 import { getPendingGoalRoute } from "./routes/get-pending-goals";
+import { getWeekSummaryRoute } from "./routes/get-week-summary";
 
 const app = fastify().withTypeProvider<ZodTypeProvider>()
 app.setValidatorCompiler( validatorCompiler );
@@ -11,6 +12,7 @@ app.setSerializerCompiler( serializerCompiler );
 app.register( createGoalRoute )
 app.register( createGoalCompletionRoute )
 app.register( getPendingGoalRoute )
+app.register( getWeekSummaryRoute )
 
 
 app.listen( {
